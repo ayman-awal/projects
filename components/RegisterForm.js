@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { registerUser } from '../utils/api';
 import VerifyForm from './VerifyForm';
+//import styles from '../styles/LoginForm.module.css'
+
+import { Button, Input } from 'antd';
+import styles from '../styles/LoginForm.module.css';
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -20,39 +24,48 @@ export default function RegisterForm() {
       });
       console.log(response);
       setRegistrationComplete(true);
+
     } catch (error) {
       console.error('Registration error:', error);
+      router.push("/failed");
     }
   };
 
   if (registrationComplete) {
+    //router.push("/verify");
     return <VerifyForm email={email} />;
   }
 
   return (
-    <form onSubmit={handleRegister}>
-      <h2>Register</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+    <div className={styles.container}>
+        <form onSubmit={handleRegister}>
+          <h1>Sign Up</h1>
+          <Input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={styles.input}
+          />
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={styles.input}
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Register</button>
-    </form>
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={styles.input}
+          />
+          <Button className={styles.Button} htmlType="submit" type="primary">Register</Button>
+        </form>
+    </div>
+    
   );
 }

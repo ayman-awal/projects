@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { verifyEmail } from '../utils/api';
+import styles from '../styles/LoginForm.module.css';
+import { Button, Input } from 'antd';
 
 export default function VerifyForm({ email }) {
   const router = useRouter();
@@ -12,22 +14,26 @@ export default function VerifyForm({ email }) {
       const response = await verifyEmail(otp, email);
       console.log(response);
 
-      router.push('/authenticated');
+      router.push('/confirmation');
+      console.log("Successfully registered");
     } catch (error) {
       console.error('Verification error:', error);
     }
   };
 
   return (
-    <form onSubmit={handleVerify}>
-      <h2>Verify Email</h2>
-      <input
-        type="text"
-        placeholder="OTP"
-        value={otp}
-        onChange={(e) => setOtp(e.target.value)}
-      />
-      <button type="submit">Verify</button>
-    </form>
+    <div className={styles.container}>
+      <form onSubmit={handleVerify}>
+        <h2>Verify Email</h2>
+        <Input
+          type="text"
+          placeholder="Enter your OTP"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
+        />
+        <Button className={styles.Button} type="primary" htmlType="submit">Verify</Button>
+      </form>
+    </div>
+  
   );
 }

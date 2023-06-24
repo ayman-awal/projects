@@ -1,16 +1,18 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Button } from 'antd';
+import LoginForm from '../components/LoginForm';
+import styles from '../styles/LoginForm.module.css'
 
 function Home() {
+
   return (
     <div>
-      <h1>Welcome to the Next.js project</h1>
-      <Link href="/login">
-        Login
-      </Link>
-      <br></br>
-      <Link href="/register">
-        Register
-      </Link>
+      <LoginForm />
+      
+      <div className={styles.registerDiv}>
+        <Button className={styles.Button} type="primary" href="/register">Register</Button>
+      </div>
+
     </div>
   );
 }

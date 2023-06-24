@@ -9,11 +9,10 @@ export const loginUser = async (data) => {
       },
       body: JSON.stringify(data),
     });
+    console.log("loginUser:")
     console.log(response.data)
     if (response.ok) {
-
       const data = await response.json();
-      //localStorage.setItem('token', token);
       return data;
     } else {
       throw new Error('Login failed');
@@ -33,8 +32,10 @@ export const registerUser = async (data) => {
       },
       body: JSON.stringify(data),
     });
+    console.log(response);
     if (response.ok) {
       const data = await response.json();
+      console.log(data);
       return data;
     } else {
       throw new Error('Registration failed');
@@ -67,15 +68,18 @@ export const verifyEmail = async (otp, email) => {
   }
 };
 
-/*
+
 export const getUserInfo = async (token) => {
   try {
     const response = await fetch(`${API_URL}/api/user/verify`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       },
     });
+
+    console.log('Response:', response);
 
     if (response.ok) {
       const data = await response.json();
@@ -88,4 +92,5 @@ export const getUserInfo = async (token) => {
     throw error;
   }
 };
-*/
+
+
