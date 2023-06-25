@@ -1,5 +1,5 @@
 import Link from "next/link"
-import styles from '../styles/LoginForm.module.css';
+import styles from '../styles/UniversalStyles.module.scss';
 import { Button, Input } from 'antd';
 
 export default function Login() {

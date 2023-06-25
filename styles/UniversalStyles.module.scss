@@ -1,0 +1,33 @@
+$white: #f1f1f1;
+$border-color: #ccc;
+
+.container {
+  width: 35%; 
+  margin: auto;
+  padding: 20px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  background-color: $white;
+  margin-top: 80px;
+
+}
+
+.input{
+  width: 100%;
+  padding: 10px;
+  margin: 30px, auto;
+  margin-top: 10px;
+
+}
+
+.Button{
+  width: 100%;
+  margin-top: 30px;
+  font-size: large;
+  padding: 0 0 10px 0;
+}
+
+.registerDiv{
+  width: 35%; 
+  margin: auto;
+}

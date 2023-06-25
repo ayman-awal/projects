@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button, Input } from 'antd';
-import styles from '../styles/LoginForm.module.css'
+import styles from '../styles/UniversalStyles.module.scss'
 
 
 

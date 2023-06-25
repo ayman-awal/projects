@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { registerUser } from '../utils/api';
 import VerifyForm from './VerifyForm';
-//import styles from '../styles/LoginForm.module.css'
 
 import { Button, Input } from 'antd';
-import styles from '../styles/LoginForm.module.css';
+import styles from '../styles/UniversalStyles.module.scss';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/userSlice';
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -13,6 +14,8 @@ export default function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [registrationComplete, setRegistrationComplete] = useState(false);
+  const dispatch = useDispatch();
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -23,7 +26,11 @@ export default function RegisterForm() {
         password,
       });
       console.log(response);
+      const user = { name, email };
+      localStorage.setItem('email', email);
+      //dispatch(setUser(user));
       setRegistrationComplete(true);
+      //router.push('/authenticatedPage');
 
     } catch (error) {
       console.error('Registration error:', error);

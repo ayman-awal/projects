@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Button } from 'antd';
 import LoginForm from '../components/LoginForm';
-import styles from '../styles/LoginForm.module.css'
+import styles from '../styles/UniversalStyles.module.scss'
 
 function Home() {
 

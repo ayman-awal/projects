@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { getUserInfo } from '../utils/api';
-import styles from '../styles/LoginForm.module.css'
+import styles from '../styles/UniversalStyles.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../store/userSlice';
 
 const authenticatedPage = () => {
-  const [userInfo, setUserInfo] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const data = await getUserInfo(token);
-          setUserInfo(data);
+          const response = await getUserInfo(token);
+          dispatch(setUser({ name: response.user.name, email: response.user.email }));
         }
       } catch (error) {
         console.error('Error fetching user info:', error);
@@ -19,19 +22,13 @@ const authenticatedPage = () => {
     };
 
     fetchUserInfo();
-  }, []);
-
-  console.log("userInfo: ", userInfo);
-
-  if (!userInfo) {
-    return <p>Loading user info...</p>;
-  }
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
       <h1>Welcome, you have successfully logged in!</h1>
-      <p><strong>Name:</strong> {userInfo.user.name}</p>
-      <p><strong>Email:</strong> {userInfo.user.email}</p>
+      <p><strong>Name:</strong> {user.name}</p>
+      <p><strong>Email:</strong> {user.email}</p>
     </div>
   );
 };
